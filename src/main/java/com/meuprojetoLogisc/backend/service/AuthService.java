@@ -12,13 +12,16 @@ public class AuthService {
 
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public AuthService(
             UserRepository repository,
-            PasswordEncoder passwordEncoder
+            PasswordEncoder passwordEncoder,
+            JwtService jwtService
     ) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public LoginResponseDTO login(LoginRequestDTO dto) {
@@ -35,8 +38,11 @@ public class AuthService {
             throw new RuntimeException("Invalid email or password");
         }
 
-        return new LoginResponseDTO(
-                "Login successful"
-        );
+        String token =
+                jwtService.generateToken(
+                        user.getEmail()
+                );
+
+        return new LoginResponseDTO(token);
     }
 }
