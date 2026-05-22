@@ -62,6 +62,7 @@ public class ProductService {
         product.setName(dto.getName());
         product.setPrice(dto.getPrice());
         product.setCategory(category);
+        product.setQuantity((dto.getQuantity()));
 
         Product savedProduct = repository.save(product);
 

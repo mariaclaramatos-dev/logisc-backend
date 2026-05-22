@@ -13,6 +13,8 @@ public class ProductRequestDTO {
 
     private Long categoryId;
 
+    private Integer quantity;
+
     public Long getCategoryId(){
         return categoryId;
     }
@@ -35,5 +37,13 @@ public class ProductRequestDTO {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }
