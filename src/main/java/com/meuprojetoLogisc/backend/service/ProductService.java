@@ -28,7 +28,8 @@ public class ProductService {
                         product.getId(),
                         product.getName(),
                         product.getPrice(),
-                        product.getCategory().getName()
+                        product.getCategory().getName(),
+                        product.getQuantity()
                 ))
                 .toList();
     }
@@ -42,11 +43,16 @@ public class ProductService {
                 product.getId(),
                 product.getName(),
                 product.getPrice(),
-                product.getCategory().getName()
+                product.getCategory().getName(),
+                product.getQuantity()
         );
     }
 
     public ProductResponseDTO createProduct(ProductRequestDTO dto) {
+
+        if (dto.getCategoryId() == null) {
+            throw new IllegalArgumentException("O ID da categoria é obrigatório e não foi enviado.");
+        }
 
         Category category = categoryRepository.findById(dto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
@@ -63,7 +69,8 @@ public class ProductService {
                 savedProduct.getId(),
                 savedProduct.getName(),
                 savedProduct.getPrice(),
-                savedProduct.getCategory().getName()
+                savedProduct.getCategory().getName(),
+                savedProduct.getQuantity()
         );
     }
 
@@ -87,7 +94,8 @@ public class ProductService {
                 updatedProduct.getId(),
                 updatedProduct.getName(),
                 updatedProduct.getPrice(),
-                updatedProduct.getCategory().getName()
+                updatedProduct.getCategory().getName(),
+                updatedProduct.getQuantity()
         );
     }
 
